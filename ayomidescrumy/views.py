@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def get_grading_parameters(request):
+def index(request):
     return HttpResponse("Welcome to Django")
 
 # Create your views here.
