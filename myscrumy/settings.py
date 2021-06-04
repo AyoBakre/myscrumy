@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['3.143.112.43', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    'ayomidescrumy.apps.AyomidescrumyConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +52,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myscrumy.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -75,10 +79,8 @@ WSGI_APPLICATION = 'myscrumy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myscrumy',
-        'USER': 'admin',
-        'PASSWORD': 'password',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -125,3 +127,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = 'ayomidescrumy:home'
+LOGOUT_REDIRECT_URL = 'ayomidescrumy:login'
+
