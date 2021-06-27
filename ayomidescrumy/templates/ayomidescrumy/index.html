@@ -12,12 +12,12 @@
 <body>
     <div class="container">
         
-		<a style="float: right;" href="/ayomidescrumy/accounts/login" class="btn btn-primary m-3">Log IN</a>
+		<a style="float: right;" href="/charlesmaryscrumy/accounts/login" class="btn btn-primary m-3">Log IN</a>
 
     <h1>SIGN UP</h1>
     <div class="row">
         <div class="col-md-4">
-            <form action="{% url 'ayomidescrumy:about' %}" method="POST">
+            <form action="" method="POST">
                 {% csrf_token %}
                 {{form|crispy}}
                 <button type="submit" class="btn btn-primary">Sign Up</button>

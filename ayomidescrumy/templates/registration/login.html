@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1>Sign In</h1>
-    <form action="{% url 'ayomidescrumy:login' %}" method="POST">
+    <form action="" method="POST">
         {% csrf_token %}
         {% if form.errors %}
 	    <p>There were some errors in the information you entered. Please correct the following:</p>
