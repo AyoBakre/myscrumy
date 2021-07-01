@@ -14,7 +14,7 @@ setup(
     license='BSD License',
     description="A simple Django app that returns 'welcome to django'",
     long_description=README,
-    url='http://3.143.112.43:8000/charlesmaryscrumy/',
+    url='http://3.143.112.43:8000/ayomidescrumy/',
     author='Ayomide Bakre',
     author_email='ayomidebakre@gmail.com',
     classifiers=[
