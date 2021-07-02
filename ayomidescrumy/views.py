@@ -41,7 +41,7 @@ def index(request):
 
     context = {'form': form}
 
-    return render(request, 'charlesmaryayo/index.html', context)
+    return render(request, 'ayomidescrumy/index.html', context)
 
 
 # Create your views here.
@@ -52,7 +52,7 @@ def move_goal(request, goal_id):
         dictionary = {
             'error': 'A record with that goal id does not exist'
         }
-        return render(request, 'charlesmaryayo/exception.html', dictionary)
+        return render(request, 'ayomidescrumy/exception.html', dictionary)
     else:
         current_user = request.user
         usr_grp = request.user.groups.all()[0]
@@ -142,7 +142,7 @@ def move_goal(request, goal_id):
         else:
             return HttpResponse('You are not authorised to move this goal')
         form = AdminChangeGoalForm()
-        return render(request, 'charlesmaryayo/moveGoal.html',
+        return render(request, 'ayomidescrumy/moveGoal.html',
                       {'form': form, 'goals': goals, 'current_user': current_user, 'goal_name': goals.goal_name})
 
 
@@ -171,7 +171,7 @@ def add_goal(request):
             return HttpResponse("Invalid credentials provided, please fill out all fields")
         else:
             form = DeveloprCreateGoalForm()
-            return render(request, 'charlesmaryayo/goal.html', dictionary)
+            return render(request, 'ayomidescrumy/goal.html', dictionary)
 
     elif request.user in qa:
         form = QACreateGoalForm()
@@ -194,7 +194,7 @@ def add_goal(request):
         else:
             form = QACreateGoalForm()
 
-        return render(request, 'charlesmaryayo/goal.html', dictionary)
+        return render(request, 'ayomidescrumy/goal.html', dictionary)
     elif request.user in admin:
         form = CreateGoalForm()
         dictionary = {'form': form, 'goal_status': GoalStatus.objects.get(status_name="Weekly Goal")}
@@ -217,7 +217,7 @@ def add_goal(request):
         else:
             form = CreateGoalForm()
 
-        return render(request, 'charlesmaryayo/goal.html', dictionary)
+        return render(request, 'ayomidescrumy/goal.html', dictionary)
     elif request.user in own:
         form = OwnerCreateGoalForm()
         dictionary = {'form': form, 'goal_status': GoalStatus.objects.get(status_name="Weekly Goal")}
@@ -240,7 +240,7 @@ def add_goal(request):
         else:
             form = OwnerCreateGoalForm()
 
-        return render(request, 'charlesmaryayo/goal.html', dictionary)
+        return render(request, 'ayomidescrumy/goal.html', dictionary)
 
 
 def home(request):
@@ -261,7 +261,7 @@ def home(request):
 
     dictionary = {'users': all_users, 'weekly': goals_weekly, 'daily': goals_daily, 'verify': goals_verify,
                   'done': goals_done, 'developer': Group.objects.first() }
-    return render(request, "charlesmaryayo/home.html", dictionary)
+    return render(request, "ayomidescrumy/home.html", dictionary)
 
 
 def change_goal(request):
@@ -282,4 +282,4 @@ def change_goal(request):
         form = ChangeGroup()
     context = {'form': form}
 
-    return render(request, 'charlesmaryayo/changeGroup.html', context)
+    return render(request, 'ayomidescrumy/changeGroup.html', context)
