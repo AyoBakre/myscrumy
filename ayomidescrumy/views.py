@@ -32,16 +32,16 @@ def index(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect('/ayomidescrumy/home')
+                return redirect('/charlesmaryayo/home')
             else:
-                return redirect('/ayomidescrumy/accounts/login')
+                return redirect('/charlesmaryayo/accounts/login')
 
     else:
         form = SignupForm()
 
     context = {'form': form}
 
-    return render(request, 'ayomidescrumy/index.html', context)
+    return render(request, 'charlesmaryayo/index.html', context)
 
 
 # Create your views here.
@@ -52,7 +52,7 @@ def move_goal(request, goal_id):
         dictionary = {
             'error': 'A record with that goal id does not exist'
         }
-        return render(request, 'ayomidescrumy/exception.html', dictionary)
+        return render(request, 'charlesmaryayo/exception.html', dictionary)
     else:
         current_user = request.user
         usr_grp = request.user.groups.all()[0]
@@ -65,7 +65,7 @@ def move_goal(request, goal_id):
                     choice = GoalStatus.objects.get(id=int(selected))
                     goals.goal_status = choice
                     goals.save()
-                    return redirect("/ayomidescrumy/home")
+                    return redirect("/charlesmaryayo/home")
                 else:
                     return HttpResponse('You are not permitted to move goal to Done Status')
             else:
@@ -82,7 +82,7 @@ def move_goal(request, goal_id):
                     goals.goal_status = choice
 
                     goals.save()
-                    return redirect("/ayomidescrumy/home")
+                    return redirect("/charlesmaryayo/home")
                 else:
                     return HttpResponse('Quality Assurance user can not move goals to weekly goals')
 
@@ -100,7 +100,7 @@ def move_goal(request, goal_id):
                     choice = GoalStatus.objects.get(id=int(selected))
                     goals.goal_status = choice
                     goals.save()
-                    return redirect("/ayomidescrumy/home")
+                    return redirect("/charlesmaryayo/home")
                 else:
                     return HttpResponse("You are only permitted to move other user's goal status from Verify status to "
                                         "Done Status")
@@ -114,7 +114,7 @@ def move_goal(request, goal_id):
                     choice = GoalStatus.objects.get(id=int(selected))
                     goals.goal_status = choice
                     goals.save()
-                    return redirect("/ayomidescrumy/home")
+                    return redirect("/charlesmaryayo/home")
             form = OwnerChangeGoalForm()
 
         elif usr_grp == Group.objects.get(name='Owner') and current_user != goals.user:
@@ -126,7 +126,7 @@ def move_goal(request, goal_id):
                     choice = GoalStatus.objects.get(id=int(selected))
                     goals.goal_status = choice
                     goals.save()
-                    return redirect("/ayomidescrumy/home")
+                    return redirect("/charlesmaryayo/home")
             form = OwnerChangeGoalForm()
 
         elif usr_grp == Group.objects.get(name='Admin'):
@@ -138,11 +138,11 @@ def move_goal(request, goal_id):
                     choice = GoalStatus.objects.get(id=int(selected))
                     goals.goal_status = choice
                     goals.save()
-                    return redirect("/ayomidescrumy/home")
+                    return redirect("/charlesmaryayo/home")
         else:
             return HttpResponse('You are not authorised to move this goal')
         form = AdminChangeGoalForm()
-        return render(request, 'ayomidescrumy/moveGoal.html',
+        return render(request, 'charlesmaryayo/moveGoal.html',
                       {'form': form, 'goals': goals, 'current_user': current_user, 'goal_name': goals.goal_name})
 
 
@@ -167,11 +167,11 @@ def add_goal(request):
                 add_goal.user = user
                 add_goal.goal_status = GoalStatus.objects.get(status_name="Weekly Goal")
                 add_goal.save()
-                return redirect("/ayomidescrumy/home")
+                return redirect("/charlesmaryayo/home")
             return HttpResponse("Invalid credentials provided, please fill out all fields")
         else:
             form = DeveloprCreateGoalForm()
-            return render(request, 'ayomidescrumy/goal.html', dictionary)
+            return render(request, 'charlesmaryayo/goal.html', dictionary)
 
     elif request.user in qa:
         form = QACreateGoalForm()
@@ -189,12 +189,12 @@ def add_goal(request):
                 add_goal.user = user
                 add_goal.goal_status = GoalStatus.objects.get(status_name="Weekly Goal")
                 add_goal.save()
-                return redirect("/ayomidescrumy/home")
+                return redirect("/charlesmaryayo/home")
             return HttpResponse("Invalid credentials provided, please fill out all fields")
         else:
             form = QACreateGoalForm()
 
-        return render(request, 'ayomidescrumy/goal.html', dictionary)
+        return render(request, 'charlesmaryayo/goal.html', dictionary)
     elif request.user in admin:
         form = CreateGoalForm()
         dictionary = {'form': form, 'goal_status': GoalStatus.objects.get(status_name="Weekly Goal")}
@@ -212,12 +212,12 @@ def add_goal(request):
                 add_goal.user = user
                 add_goal.goal_status = GoalStatus.objects.get(status_name="Weekly Goal")
                 add_goal.save()
-                return redirect("/ayomidescrumy/home")
+                return redirect("/charlesmaryayo/home")
             return HttpResponse("Invalid credentials provided, please fill out all fields")
         else:
             form = CreateGoalForm()
 
-        return render(request, 'ayomidescrumy/goal.html', dictionary)
+        return render(request, 'charlesmaryayo/goal.html', dictionary)
     elif request.user in own:
         form = OwnerCreateGoalForm()
         dictionary = {'form': form, 'goal_status': GoalStatus.objects.get(status_name="Weekly Goal")}
@@ -235,12 +235,12 @@ def add_goal(request):
                 add_goal.user = user
                 add_goal.goal_status = GoalStatus.objects.get(status_name="Weekly Goal")
                 add_goal.save()
-                return redirect("/ayomidescrumy/home")
+                return redirect("/charlesmaryayo/home")
             return HttpResponse("Invalid credentials provided, please fill out all fields")
         else:
             form = OwnerCreateGoalForm()
 
-        return render(request, 'ayomidescrumy/goal.html', dictionary)
+        return render(request, 'charlesmaryayo/goal.html', dictionary)
 
 
 def home(request):
@@ -261,7 +261,7 @@ def home(request):
 
     dictionary = {'users': all_users, 'weekly': goals_weekly, 'daily': goals_daily, 'verify': goals_verify,
                   'done': goals_done, 'developer': Group.objects.first() }
-    return render(request, "ayomidescrumy/home.html", dictionary)
+    return render(request, "charlesmaryayo/home.html", dictionary)
 
 
 def change_goal(request):
@@ -277,9 +277,9 @@ def change_goal(request):
 
             group.user_set.add(user)
             messages.success(request, f'You successfully changed group to {group.name}')
-            return redirect("/ayomidescrumy/home")
+            return redirect("/charlesmaryayo/home")
     else:
         form = ChangeGroup()
     context = {'form': form}
 
-    return render(request, 'ayomidescrumy/changeGroup.html', context)
+    return render(request, 'charlesmaryayo/changeGroup.html', context)

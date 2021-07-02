@@ -27,7 +27,7 @@ def index(request):
 
     context = {'form': form}
 
-    return render(request, 'ayomidescrumy/index.html', context)
+    return render(request, 'charlesmaryayo/index.html', context)
 
     # return HttpResponse("This is a Scrum Application")
 
@@ -40,7 +40,7 @@ def move_goal(request, goal_id):
         dictionary = {
             'error': 'A record with that goal id does not exist'
         }
-        return render(request, 'ayomidescrumy/exception.html', dictionary)
+        return render(request, 'charlesmaryayo/exception.html', dictionary)
     else:
         return HttpResponse(goal.goal_name)
 
@@ -65,7 +65,7 @@ def add_goal(request):
 
     context = {'form': form}
 
-    return render(request, 'ayomidescrumy/goal.html', context)
+    return render(request, 'charlesmaryayo/goal.html', context)
 
 
 def home(request):
@@ -88,4 +88,4 @@ def home(request):
         'my_users': my_users,
     }
 
-    return render(request, 'ayomidescrumy/home.html', dictionary)
+    return render(request, 'charlesmaryayo/home.html', dictionary)
